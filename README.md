@@ -286,8 +286,72 @@ The approach evolves across the rounds, with three rounds completed so far:
 
 
 
-#### Exploration vs Exploitation Strategy
+**Week 11 – Cluster-Aware Optimisation + Structured Ensemble Search**
 
+&#x20;- introduced K-Means clustering to identify multiple high-performing regions instead of relying only on a single elite point
+
+&#x20;- applied StandardScaler to improve numerical stability and neural network convergence
+
+&#x20;- shifted from single-mode optimisation to multi-region exploitation using clustered elite samples
+
+&#x20;- candidate generation performed around cluster centres with controlled variance (cluster-specific local search)
+
+&#x20;- scoring influenced by cluster structure, encouraging exploration of under-explored high-performing regions
+
+&#x20;- improved robustness on multimodal functions with multiple local optima
+
+&#x20;- reduced premature convergence and improved diversity of explored solutions
+
+
+
+(Code 11: KMeans clustering + StandardScaler + cluster-based candidate generation + surrogate scoring)
+
+
+
+**Week 12 –  PCA-Guided Search + Directional Exploration**
+
+
+
+&#x20;- introduced PCA to extract dominant directions of variation in elite solutions
+
+&#x20;- used principal components to guide sampling in lower-dimensional meaningful subspaces
+
+&#x20;- combined PCA-driven exploration with local perturbations and uniform sampling
+
+&#x20;- reduced isotropic randomness by introducing structured directional bias
+
+&#x20;- improved efficiency in higher-dimensional problems by focusing search on principal directions
+
+&#x20;- enhanced convergence stability by aligning sampling with data-driven geometry of the search space
+
+&#x20;- improved performance in cases where objective structure lies in low-dimensional manifolds
+
+(Code 12: PCA-based sampling + directional perturbations + mixed exploration strategy)
+
+
+
+**Week 13 –  Bandit-Inspired Adaptive Sampling + Final Unified Strategy**
+
+
+
+&#x20;- introduced bandit-style allocation of different sampling strategies within a single framework
+
+&#x20;- combined multiple candidate generation methods: trust-region sampling, uniform sampling, and beta-distributed interior sampling
+
+&#x20;- replaced fixed sampling ratios with adaptive strategy selection
+
+&#x20;- used MC Dropout uncertainty to improve robustness of surrogate predictions
+
+&#x20;- final scoring combined mean prediction, uncertainty, and structured exploration effects
+
+&#x20;- achieved highest stability across all benchmark functions by avoiding dependence on a single search heuristic
+
+&#x20;- resulted in a fully adaptive optimisation framework combining surrogate modelling, uncertainty estimation, and multi-strategy search
+
+(Code 13: bandit-style multi-sampler + MC Dropout + hybrid UCB scoring + adaptive candidate generation)
+
+
+#### Exploration vs Exploitation Strategy
 
 
 The strategy balances exploitation, exploration, and adaptation. Exploitation focuses on refining areas predicted to perform well, while exploration checks untested regions to prevent early convergence. The strategy adapts based on model uncertainty and observed performance trends.
